@@ -1,31 +1,20 @@
 import TechIcon from '../TechIcon';
 
 const ProjectsSection = () => {
+  // Project image mapping
+  const projectImages: { [key: string]: string } = {
+    "Permitly": "/assets/Projects/Permitly.png",
+    "CodeTrail": "/assets/Projects/CodeTrail.png", 
+    "FeedForward": "/assets/Projects/FeedForward.png",
+    "Alumni Hunt": "/assets/institutions/IITk logo.png"
+  };
+
   const projects = [
-    {
-      title: "Permitly",
-      subtitle: "Enterprise Visitor Management System",
-      status: "In Development",
-      technologies: ["Kotlin", "Node.js", "Jetpack Compose"],
-      description: "Enterprise-grade visitor management platform with biometric integration and compliance automation, currently in beta testing for Google Play Store release.",
-      features: [
-        "Offline-first architecture with intelligent sync and conflict resolution",
-        "Role-based approval workflows with Active Directory integration", 
-        "Advanced security framework including facial recognition and end-to-end encryption",
-        "Real-time analytics dashboard with sub-2-second API response times"
-      ],
-      highlights: [
-        "Built with Kotlin/Jetpack Compose for native Android performance",
-        "Node.js backend with automated compliance reporting",
-        "GDPR-compliant data handling with automatic PII anonymization",
-        "Cloudinary integration for secure photo processing"
-      ]
-    },
     {
       title: "CodeTrail", 
       subtitle: "Competitive Programming Analytics",
       status: "February 2025",
-      technologies: ["React", "Node.js", "PostgreSQL"],
+      technologies: ["React", "Node.js", "PostgreSQL", "GraphQL", "TypeScript", "Prisma", "Redis", "Docker", "DeepSeek"],
       description: "AI-powered analytics platform that unifies competitive programming data from multiple sources with personalized insights.",
       features: [
         "Reverse-engineered LeetCode GraphQL API for seamless data integration",
@@ -41,29 +30,29 @@ const ProjectsSection = () => {
       ]
     },
     {
-      title: "Alumni Hunt",
-      subtitle: "Custom Database Engine", 
-      status: "Academic Project",
-      technologies: ["Python"],
-      description: "High-performance database query engine optimized for large-scale alumni data retrieval with advanced indexing strategies.",
+      title: "Permitly",
+      subtitle: "Enterprise Visitor Management System",
+      status: "Soon Releasing on Google Play Store",
+      technologies: ["Kotlin", "Node.js", "Jetpack Compose", "AWS", "Android", "Redis", "Prisma", "Firebase"],
+      description: "Enterprise-grade visitor management platform with biometric integration and compliance automation, currently in beta testing for Google Play Store release.",
       features: [
-        "Custom query processing for 100,000+ records with efficient indexing",
-        "Dual-sorted disk layout optimization to minimize seek times",
-        "Memory-efficient data structures including tries and hashed buckets", 
-        "Support for complex query patterns with fast retrieval times"
+        "Offline-first architecture with intelligent sync and conflict resolution",
+        "Role-based approval workflows with Active Directory integration", 
+        "Advanced security framework including facial recognition and end-to-end encryption",
+        "Real-time analytics dashboard with sub-2-second API response times"
       ],
       highlights: [
-        "Optimized for 100K+ record queries",
-        "Custom indexing algorithms for performance",
-        "Memory-efficient data structures",
-        "Fast complex query processing"
+        "Built with Kotlin/Jetpack Compose for native Android performance",
+        "Node.js backend with automated compliance reporting",
+        "GDPR-compliant data handling with automatic PII anonymization",
+        "Cloudinary integration for secure photo processing"
       ]
     },
     {
       title: "FeedForward",
       subtitle: "Anonymous Feedback Platform",
       status: "December 2023", 
-      technologies: ["Next.js", "MongoDB"],
+      technologies: ["Next.js", "MongoDB", "Tailwind", "OpenAI", "Redis"],
       description: "Secure feedback platform combining anonymous communication with AI-powered suggestion systems.",
       features: [
         "Next.js/TypeScript with MongoDB and Mongoose ODM",
@@ -76,6 +65,25 @@ const ProjectsSection = () => {
         "Advanced spam prevention system",
         "Real-time analytics dashboard", 
         "Secure communication platform"
+      ]
+    },
+    {
+      title: "Alumni Hunt",
+      subtitle: "Custom Database Engine", 
+      status: "Academic Project",
+      technologies: ["Python", "DSA", "Database", "IITK"],
+      description: "High-performance database query engine optimized for large-scale alumni data retrieval with advanced indexing strategies.",
+      features: [
+        "Custom query processing for 100,000+ records with efficient indexing",
+        "Dual-sorted disk layout optimization to minimize seek times",
+        "Memory-efficient data structures including tries and hashed buckets", 
+        "Support for complex query patterns with fast retrieval times"
+      ],
+      highlights: [
+        "Optimized for 100K+ record queries",
+        "Custom indexing algorithms for performance",
+        "Memory-efficient data structures",
+        "Fast complex query processing"
       ]
     }
   ];
@@ -109,27 +117,49 @@ const ProjectsSection = () => {
                     {/* Main Card */}
                     <div className="relative glass rounded-2xl p-8 hover-lift">
                       <div className="aspect-video bg-gradient-surface rounded-lg flex items-center justify-center relative overflow-hidden">
-                        {/* Project Preview */}
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
-                            {project.title.charAt(0)}
+                        {/* Project Image or Fallback */}
+                        {projectImages[project.title] ? (
+                          <img 
+                            src={projectImages[project.title]}
+                            alt={`${project.title} preview`}
+                            className={`w-full h-full rounded-lg ${project.title === 'Alumni Hunt' ? 'object-contain p-4 bg-white' : 'object-cover'}`}
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.innerHTML = `
+                                  <div class="text-center p-8">
+                                    <div class="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
+                                      ${project.title.charAt(0)}
+                                    </div>
+                                    <h4 class="text-xl font-bold text-foreground mb-2">${project.title}</h4>
+                                    <p class="text-text-muted text-sm">${project.subtitle}</p>
+                                  </div>
+                                `;
+                              }
+                            }}
+                          />
+                        ) : (
+                          <div className="text-center p-8">
+                            <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
+                              {project.title.charAt(0)}
+                            </div>
+                            <h4 className="text-xl font-bold text-foreground mb-2">{project.title}</h4>
+                            <p className="text-text-muted text-sm">{project.subtitle}</p>
                           </div>
-                          <h4 className="text-xl font-bold text-foreground mb-2">{project.title}</h4>
-                          <p className="text-text-muted text-sm">{project.subtitle}</p>
-                        </div>
+                        )}
 
                         {/* Floating Elements */}
                         <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
                         <div className="absolute bottom-4 left-4 w-2 h-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
                       </div>
 
-                      {/* Technical Highlights */}
-                      <div className="mt-6 space-y-2">
-                        <h5 className="text-sm font-semibold text-foreground mb-2">Technical Highlights:</h5>
-                        {project.highlights.slice(0, 2).map((highlight, i) => (
-                          <div key={i} className="flex items-center gap-2 text-xs text-text-secondary">
-                            <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-                            <span>{highlight}</span>
+                      {/* Tech Stack Icons */}
+                      <div className="mt-6 flex justify-center gap-4">
+                        {project.technologies.map((tech, i) => (
+                          <div key={i} className="w-8 h-8 flex items-center justify-center">
+                            <TechIcon name={tech} className="w-full h-full opacity-70 hover:opacity-100 transition-opacity" />
                           </div>
                         ))}
                       </div>
@@ -149,16 +179,6 @@ const ProjectsSection = () => {
                         </span>
                       </div>
                       <p className="text-xl text-text-secondary font-medium">{project.subtitle}</p>
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="flex items-center gap-3">
-                      {project.technologies.map((tech, i) => (
-                        <div key={i} className="flex items-center gap-2 px-3 py-1 bg-accent/20 text-accent rounded-full">
-                          <TechIcon name={tech} className="w-4 h-4" />
-                          <span className="text-sm font-medium">{tech}</span>
-                        </div>
-                      ))}
                     </div>
 
                     {/* Description */}
@@ -181,15 +201,115 @@ const ProjectsSection = () => {
 
                     {/* Action Buttons */}
                     <div className="flex flex-wrap gap-4 pt-4">
-                      <button className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300">
-                        View Live
-                      </button>
-                      <button className="px-6 py-2 border border-accent text-accent rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-300">
-                        View on GitHub
-                      </button>
-                      <button className="px-6 py-2 border border-text-muted text-text-muted rounded-lg font-medium hover:border-foreground hover:text-foreground transition-all duration-300">
-                        Engineering
-                      </button>
+                      {/* View Live / Download Button */}
+                      {project.title === "CodeTrail" && (
+                        <a
+                          href="https://main.d2jc37kgdt0gqz.amplifyapp.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300"
+                        >
+                          View Live
+                        </a>
+                      )}
+                      {project.title === "FeedForward" && (
+                        <a
+                          href="https://main.d2hkbxalmybjjw.amplifyapp.com/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300"
+                        >
+                          View Live
+                        </a>
+                      )}
+                      {project.title === "Permitly" && (
+                        <button className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium opacity-75 cursor-not-allowed transition-all duration-300">
+                          Download Now
+                        </button>
+                      )}
+                      
+                      {/* GitHub Button */}
+                      {project.title === "Permitly" ? (
+                        <button className="px-6 py-2 border border-accent text-accent rounded-lg font-medium opacity-75 cursor-not-allowed transition-all duration-300">
+                          View on GitHub
+                        </button>
+                      ) : (
+                        <a 
+                          href={
+                            project.title === "CodeTrail" ? "https://github.com/Tejaswa2611/CodeTrail" :
+                            project.title === "FeedForward" ? "https://github.com/Tejaswa2611/Ghost-Note" :
+                            project.title === "Alumni Hunt" ? "https://github.com/Tejaswa2611/Alumni-Hunt" :
+                            "#"
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-2 border border-accent text-accent rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                        >
+                          View on GitHub
+                        </a>
+                      )}
+                      
+                      {/* PDF Report Button for Alumni Hunt */}
+                      {project.title === "Alumni Hunt" && (
+                        <a
+                          href="/assets/Projects/Report.pdf"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-all duration-300 flex items-center gap-2"
+                        >
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
+                          </svg>
+                          PDF Report
+                        </a>
+                      )}
+                      
+                      {/* Engineering Button */}
+                      {(project.title === "CodeTrail" || project.title === "FeedForward") && (
+                        <a
+                          href={
+                            project.title === "CodeTrail" ? "https://main.d2jc37kgdt0gqz.amplifyapp.com/engineering" :
+                            "https://main.d2hkbxalmybjjw.amplifyapp.com/engineering"
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="relative px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 overflow-hidden group transform hover:scale-105 hover:-translate-y-1"
+                          style={{
+                            background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4), 0 0 20px rgba(118, 75, 162, 0.3)',
+                            animation: 'rainbow-glow 2s ease-in-out infinite alternate'
+                          }}
+                        >
+                          {/* Animated rainbow background */}
+                          <div 
+                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                            style={{
+                              background: 'linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #fd79a8, #fdcb6e)',
+                              backgroundSize: '400% 400%',
+                              animation: 'rainbow-shift 3s ease infinite'
+                            }}
+                          ></div>
+                          
+                          {/* Sparkle overlay */}
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <div className="absolute top-1 left-2 w-1 h-1 bg-white rounded-full animate-ping"></div>
+                            <div className="absolute top-3 right-3 w-1.5 h-1.5 bg-yellow-300 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                            <div className="absolute bottom-2 left-4 w-1 h-1 bg-cyan-300 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+                            <div className="absolute bottom-3 right-2 w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+                          </div>
+                          
+                          {/* Sliding shine effect */}
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                          
+                          {/* Button text */}
+                          <span className="relative z-10 text-white font-bold tracking-wide text-shadow">
+                            Engineering
+                          </span>
+                          
+                          {/* Pulsing border */}
+                          <div className="absolute inset-0 rounded-lg border-2 border-white/20 group-hover:border-white/40 transition-all duration-300"></div>
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -2,12 +2,24 @@ import { useEffect, useState } from 'react';
 import { Mail, User, Briefcase } from 'lucide-react';
 
 const HeroSection = () => {
-  const [displayText, setDisplayText] = useState('Full Stack Engineer');
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
   
-  // Simple, reliable approach - just show the text directly
+  const fullText = 'Full Stack Engineer';
+  
   useEffect(() => {
-    // Optional: Add a simple reveal animation
-    setDisplayText('Full Stack Engineer');
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setDisplayText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+      }
+    }, 100);
+
+    return () => clearInterval(typingInterval);
   }, []);
 
   const quickActions = [
@@ -105,10 +117,11 @@ const HeroSection = () => {
                   <span className="block text-gradient">Mathur</span>
                 </h1>
 
-                {/* Animated Subtitle */}
+                {/* Animated Subtitle with Typewriter Effect */}
                 <div className="text-xl md:text-2xl lg:text-3xl text-text-secondary font-medium">
                   <span className="inline-block min-h-[1.5em]">
                     {displayText}
+                    {isTyping && <span className="animate-pulse text-primary">|</span>}
                   </span>
                 </div>
               </div>
@@ -119,7 +132,8 @@ const HeroSection = () => {
                   <button
                     key={index}
                     onClick={() => scrollToSection(action.target)}
-                    className={`group relative px-6 py-4 bg-gradient-to-r ${action.gradient} text-white rounded-xl font-semibold text-sm uppercase tracking-wide transition-all duration-300 hover-lift hover:scale-105 overflow-hidden`}
+                    className={`group relative px-6 py-4 bg-gradient-to-r ${action.gradient} text-white rounded-xl font-semibold text-sm uppercase tracking-wide transition-all duration-300 hover-lift hover:scale-105 overflow-hidden transform hover:shadow-2xl`}
+                    style={{ animationDelay: `${(index + 1) * 0.2}s` }}
                   >
                     <div className={`absolute inset-0 bg-gradient-to-r ${action.hoverGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
                     <div className="relative flex items-center justify-center gap-2">
@@ -131,33 +145,20 @@ const HeroSection = () => {
               </div>
 
               {/* Introduction */}
-              <div className="max-w-2xl">
-                <p className="text-lg md:text-xl text-text-secondary leading-relaxed">
+              <div className="max-w-2xl space-y-6">
+                <p className="text-lg md:text-xl text-text-secondary leading-relaxed opacity-90 hover:opacity-100 transition-opacity duration-300">
                   Hi! I'm a Full Stack Engineer who genuinely loves tackling tough problems and turning big ideas into real, usable solutions. I thrive on building scalable systems that make a difference—whether it's a sleek web app, a powerful mobile tool, or a robust cloud platform.
                 </p>
                 
-                <p className="text-lg md:text-xl text-text-secondary leading-relaxed mt-4">
+                <p className="text-lg md:text-xl text-text-secondary leading-relaxed opacity-90 hover:opacity-100 transition-opacity duration-300">
                   For me, clean architecture and thoughtful engineering aren't just buzzwords; they're the foundation of every project I take from concept all the way to launch. If there's a complex challenge, I'm always excited to dig in and deliver something that really works.
                 </p>
-              </div>
-
-              {/* Additional Info Pills */}
-              <div className="flex flex-wrap gap-3 justify-center lg:justify-start">
-                <div className="px-4 py-2 bg-primary/10 text-primary rounded-full text-sm font-medium border border-primary/20">
-                  🎓 IIT Kanpur
-                </div>
-                <div className="px-4 py-2 bg-accent/10 text-accent rounded-full text-sm font-medium border border-accent/20">
-                  🌟 Available for Work
-                </div>
-                <div className="px-4 py-2 bg-secondary/10 text-secondary rounded-full text-sm font-medium border border-secondary/20">
-                  📍 Remote/Hybrid
-                </div>
               </div>
             </div>
           </div>
 
           {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce opacity-70 hover:opacity-100 transition-opacity duration-300">
             <div className="w-6 h-10 border-2 border-text-muted rounded-full flex justify-center">
               <div className="w-1 h-3 bg-text-muted rounded-full mt-2 animate-pulse"></div>
             </div>

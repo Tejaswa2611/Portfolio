@@ -4,38 +4,44 @@ const ExperienceSection = () => {
       role: "Backend Engineer",
       company: "Aris Investing",
       period: "July 2025 - Present",
+      logo: "/assets/institutions/aris investing.jpeg",
       description: "Building financial infrastructure using AWS serverless architecture. Focused on automated portfolio management and real-time financial data processing.",
       achievements: [
-        "Developed serverless CRUD APIs with AWS Lambda for scalable email service management",
-        "Built S3-MySQL integration for automated financial data comparison and reporting", 
-        "Engineered policy monitoring system for automated portfolio rebalancing based on cash thresholds"
+        "Developed serverless CRUD APIs using AWS Lambda for email service management with RESTful endpoints",
+        "Engineered AWS Step Functions for parallel database migration across 50+ tables with 10K-record batches, maintaining ACID compliance and reducing migration time by 75%",
+        "Engineered S3-MySQL integration to fetch files, compare financial data, and generate automated reports",
+        "Built policy engine using AWS Lambda & Node.js to monitor cash thresholds & automate portfolio rebalancing"
       ],
       technologies: ["AWS Lambda", "S3", "MySQL", "Node.js", "Serverless"],
       current: true
     },
     {
-      role: "Full Stack Engineer", 
+      role: "Full Stack Engineer Intern", 
       company: "EquiDEI",
       period: "June 2024 - August 2024",
+      logo: "/assets/institutions/equiDEI.avif",
       description: "Delivered automation solutions that transformed manual processes into intelligent systems, achieving significant operational efficiency gains.",
       achievements: [
-        "Built Dialogflow chatbot with Node.js backend, reducing manual data entry by 90%",
-        "Developed React dashboard with real-time visualizations and responsive design",
-        "Automated data workflows using Google Apps Script with intelligent batching algorithms"
+        "Built a Dialogflow chatbot & Node.js backend to automate user-database tasks, reducing manual entry by ∼90%",
+        "Developed REST APIs with Node.js (TS), Sequelize, and PostgreSQL for real-time validation and integration",
+        "Created a React dashboard with dynamic graphs and responsive design, reducing navigation time by ∼30%",
+        "Automated data flow via Google Apps Script with batching & backoff techniques, optimizing API usage by ∼60%"
       ],
       technologies: ["React", "Node.js", "Dialogflow", "Google Apps Script", "MongoDB"],
       current: false
     },
-    {
+    { 
       role: "Technical Lead",
       company: "Techkriti IIT Kanpur",
       period: "2023-2024",
+      logo: "/assets/institutions/iitk-logo white.png",
+      secondaryLogo: "/assets/institutions/Techkriti.png",
       description: "Led technical infrastructure for Asia's largest student-run technical festival, managing systems for 30,000+ attendees.",
       achievements: [
-        "Coordinated 200+ team members across multiple technical verticals",
-        "Launched 10+ event portals with centralized backend architecture", 
-        "Developed festival's first mobile app with 1,500+ downloads",
-        "Managed platforms serving 400K+ page views and 29.5K daily active users"
+        "Led 200+ cross-functional executives to successfully execute Techkriti for 30K+ attendees",
+        "Launched 10+ event portals with centralized MERN backend, streamlining event management & user registration",
+        "Developed Techkriti's first mobile app (Flutter, Node.js, MongoDB, Firebase), gaining 1.5K+ downloads",
+        "Managed high-traffic platforms with 400K+ views, 29.5K daily active users, & 14,500+ registered participants"
       ],
       technologies: ["React", "Node.js", "Express", "MongoDB", "AWS", "Mobile Development"],
       current: false
@@ -71,18 +77,50 @@ const ExperienceSection = () => {
                 {/* Content Card */}
                 <div className="ml-20 glass rounded-xl p-8 hover-lift">
                   <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
-                    <div>
-                      <h3 className="text-2xl font-bold text-foreground mb-2">{exp.role}</h3>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xl text-primary font-semibold">{exp.company}</span>
-                        {exp.current && (
-                          <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">
-                            Current
-                          </span>
+                    <div className="flex items-start gap-4">
+                      {/* Company Logo */}
+                      <div className="flex items-center gap-2 flex-shrink-0">
+                        <div className="w-12 h-12 flex items-center justify-center">
+                          <img 
+                            src={exp.logo} 
+                            alt={`${exp.company} logo`}
+                            className="w-full h-full object-contain"
+                            onError={(e) => {
+                              const target = e.target as HTMLImageElement;
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent) {
+                                parent.className = "w-12 h-12 bg-gradient-primary rounded-lg flex items-center justify-center text-lg font-bold text-primary-foreground";
+                                parent.innerHTML = exp.company.charAt(0);
+                              }
+                            }}
+                          />
+                        </div>
+                        {exp.secondaryLogo && (
+                          <div className="w-12 h-12 flex items-center justify-center">
+                            <img 
+                              src={exp.secondaryLogo} 
+                              alt={`${exp.company} secondary logo`}
+                              className="w-full h-full object-contain"
+                            />
+                          </div>
                         )}
                       </div>
+                      
+                      {/* Role and Company Info */}
+                      <div>
+                        <h3 className="text-2xl font-bold text-foreground mb-2">{exp.role}</h3>
+                        <div className="flex items-center gap-2 mb-2">
+                          <span className="text-xl text-primary font-semibold">{exp.company}</span>
+                          {exp.current && (
+                            <span className="px-3 py-1 bg-primary/10 text-primary text-sm rounded-full">
+                              Current
+                            </span>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                    <div className="text-sm text-text-muted bg-muted px-4 py-2 rounded-full">
+                    <div className="text-sm text-text-muted bg-muted px-4 py-2 rounded-full mt-4 lg:mt-0">
                       {exp.period}
                     </div>
                   </div>

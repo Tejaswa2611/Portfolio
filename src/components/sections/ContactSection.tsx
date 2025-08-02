@@ -16,8 +16,8 @@ const ContactSection = () => {
     },
     {
       label: "GitHub",
-      value: "github.com/tejaswa",
-      link: "https://github.com/tejaswa",
+      value: "github.com/Tejaswa2611",
+      link: "https://github.com/Tejaswa2611",
       icon: Github
     },
     {
@@ -72,25 +72,6 @@ const ContactSection = () => {
                   ))}
                 </div>
               </div>
-
-              {/* Additional Info */}
-              <div className="glass rounded-xl p-6">
-                <h4 className="text-lg font-semibold text-foreground mb-4">Current Status</h4>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-                    <span className="text-text-secondary">Open to new opportunities</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-accent rounded-full"></span>
-                    <span className="text-text-secondary">Available for freelance projects</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 bg-primary rounded-full"></span>
-                    <span className="text-text-secondary">Graduating in 2025</span>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Call to Action */}
@@ -124,7 +105,7 @@ const ContactSection = () => {
                     </a>
                     
                     <a
-                      href="https://github.com/tejaswa"
+                      href="https://github.com/Tejaswa2611"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block w-full px-8 py-4 border-2 border-accent text-accent rounded-lg font-semibold hover:bg-accent hover:text-accent-foreground transition-all duration-300 group"
@@ -137,18 +118,6 @@ const ContactSection = () => {
                     </a>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Education Info */}
-          <div className="mt-16 text-center fade-in-up" style={{ animationDelay: '0.4s' }}>
-            <div className="glass rounded-xl p-6 max-w-md mx-auto">
-              <h4 className="text-lg font-semibold text-foreground mb-2">Education</h4>
-              <div className="text-text-secondary">
-                <div className="font-medium">B.Tech Electrical Engineering</div>
-                <div className="text-sm">Indian Institute of Technology Kanpur</div>
-                <div className="text-sm text-text-muted">2021-2025</div>
               </div>
             </div>
           </div>

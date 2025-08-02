@@ -17,21 +17,21 @@ const Footer = () => {
 
             {/* Links */}
             <div className="flex items-center gap-8">
-              <a 
+              <a
                 href="mailto:mathurkiit@gmail.com"
                 className="text-text-secondary hover:text-primary transition-colors"
               >
                 Email
               </a>
-              <a 
-                href="https://github.com/tejaswa"
+              <a
+                href="https://github.com/Tejaswa2611"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-text-secondary hover:text-primary transition-colors"
               >
                 GitHub
               </a>
-              <a 
+              <a
                 href="https://linkedin.com/in/tejaswa-mathur"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -41,10 +41,7 @@ const Footer = () => {
               </a>
             </div>
 
-            {/* Copyright */}
-            <div className="text-sm text-text-muted">
-              © 2025 Tejaswa Mathur. All rights reserved.
-            </div>
+
           </div>
 
           {/* Bottom Message */}

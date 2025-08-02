@@ -13,13 +13,14 @@ const TechIcon = ({ name, className = "w-6 h-6" }: TechIconProps) => {
       'react.js': '/assets/skills/react.png',
       'next.js': '/assets/skills/nextjs.svg',
       'next': '/assets/skills/nextjs.svg',
-      'javascript': '/assets/skills/JS.jpg',
-      'js': '/assets/skills/JS.jpg',
+      'javascript': '/assets/skills/JS.png',
       'typescript': '/assets/skills/Ts.png',
       'ts': '/assets/skills/Ts.png',
-      'python': '/assets/skills/Pythond.jpeg',
+      'python': '/assets/skills/Python.png',
       'node.js': '/assets/skills/node.png',
       'node': '/assets/skills/node.png',
+      'express.js': '/assets/skills/node.png',
+      'express': '/assets/skills/node.png',
       'html': '/assets/skills/html.png',
       'css': '/assets/skills/css.png',
       'mongodb': '/assets/skills/mongodb.png',
@@ -33,7 +34,7 @@ const TechIcon = ({ name, className = "w-6 h-6" }: TechIconProps) => {
       'cpp': '/assets/skills/C++.png',
       'kotlin': '/assets/skills/Kotlin.png',
       'dart': '/assets/skills/Dart.jpeg',
-      'flutter': '/assets/skills/Flutter.jpg',
+      'flutter': '/assets/skills/Flutter.png',
       'jetpack compose': '/assets/skills/jetpack compose.png',
       'compose': '/assets/skills/jetpack compose.png',
       'android': '/assets/skills/android.jpg',
@@ -43,7 +44,15 @@ const TechIcon = ({ name, className = "w-6 h-6" }: TechIconProps) => {
       'docker': '/assets/skills/docker.png',
       'firebase': '/assets/skills/Firebase.png',
       'gcp': '/assets/skills/GCP.png',
-      'google cloud': '/assets/skills/GCP.png'
+      'google cloud': '/assets/skills/GCP.png',
+      'prisma': '/assets/skills/prisma.png',
+      'deepseek': '/assets/skills/deepseek.jpg',
+      'tailwind': '/assets/skills/tailwind.png',
+      'openai': '/assets/skills/openai.webp',
+      'dsa': '/assets/skills/DSA.png',
+      'database': '/assets/skills/database.svg',
+      'iitk': '/assets/institutions/iitk-logo white.png',
+      'git': '/assets/skills/git.png',
     };
 
     // Find exact match first
@@ -66,10 +75,16 @@ const TechIcon = ({ name, className = "w-6 h-6" }: TechIconProps) => {
     
     // Fallback to emojis for technologies without images
     if (techLower.includes('next')) return '▲';
-    if (techLower.includes('vue')) return '�';
+    if (techLower.includes('vue')) return '💚';
     if (techLower.includes('angular')) return '🅰️';
     if (techLower.includes('tailwind')) return '💨';
-    if (techLower.includes('flutter')) return '�';
+    if (techLower.includes('prisma')) return '🔺';
+    if (techLower.includes('deepseek')) return '🤖';
+    if (techLower.includes('openai')) return '🧠';
+    if (techLower.includes('dsa')) return '🔗';
+    if (techLower.includes('database')) return '🗄️';
+    if (techLower.includes('iitk')) return '🎓';
+    if (techLower.includes('flutter')) return '🦋';
     if (techLower.includes('express')) return '🚂';
     if (techLower.includes('django')) return '🐍';
     if (techLower.includes('flask')) return '🍶';
@@ -80,19 +95,19 @@ const TechIcon = ({ name, className = "w-6 h-6" }: TechIconProps) => {
     if (techLower.includes('postgresql') || techLower.includes('postgres')) return '🐘';
     if (techLower.includes('mysql')) return '🐬';
     if (techLower.includes('redis')) return '🔴';
-    if (techLower.includes('firebase')) return '�';
+    if (techLower.includes('firebase')) return '🔥';
     if (techLower.includes('supabase')) return '⚡';
     if (techLower.includes('java')) return '☕';
-    if (techLower.includes('go')) return '�';
+    if (techLower.includes('go')) return '🔵';
     if (techLower.includes('rust')) return '🦀';
-    if (techLower.includes('php')) return '�';
+    if (techLower.includes('php')) return '🐘';
     if (techLower.includes('docker')) return '🐳';
     if (techLower.includes('kubernetes') || techLower.includes('k8s')) return '☸️';
-    if (techLower.includes('git')) return '�';
+    if (techLower.includes('git')) return '📊';
     if (techLower.includes('github')) return '🐙';
     if (techLower.includes('gitlab')) return '🦊';
     if (techLower.includes('vercel')) return '▲';
-    if (techLower.includes('netlify')) return '�';
+    if (techLower.includes('netlify')) return '🌐';
     if (techLower.includes('gcp') || techLower.includes('google cloud')) return '☁️';
     if (techLower.includes('azure')) return '☁️';
     if (techLower.includes('dialogflow')) return '🤖';
