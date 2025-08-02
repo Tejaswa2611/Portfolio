@@ -97,13 +97,48 @@ const ProjectsSection = () => {
             {projects.map((project, index) => (
               <div 
                 key={index}
-                className={`grid lg:grid-cols-2 gap-12 items-center fade-in-up ${
-                  index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''
-                }`}
+                className="grid lg:grid-cols-2 gap-12 items-center fade-in-up"
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {/* Project Info */}
-                <div className={index % 2 === 1 ? 'lg:col-start-2' : ''}>
+                {/* Project Visual - Always on Left */}
+                <div>
+                  <div className="relative group">
+                    {/* Glowing Background */}
+                    <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-xl rounded-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
+                    
+                    {/* Main Card */}
+                    <div className="relative glass rounded-2xl p-8 hover-lift">
+                      <div className="aspect-video bg-gradient-surface rounded-lg flex items-center justify-center relative overflow-hidden">
+                        {/* Project Preview */}
+                        <div className="text-center">
+                          <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
+                            {project.title.charAt(0)}
+                          </div>
+                          <h4 className="text-xl font-bold text-foreground mb-2">{project.title}</h4>
+                          <p className="text-text-muted text-sm">{project.subtitle}</p>
+                        </div>
+
+                        {/* Floating Elements */}
+                        <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
+                        <div className="absolute bottom-4 left-4 w-2 h-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                      </div>
+
+                      {/* Technical Highlights */}
+                      <div className="mt-6 space-y-2">
+                        <h5 className="text-sm font-semibold text-foreground mb-2">Technical Highlights:</h5>
+                        {project.highlights.slice(0, 2).map((highlight, i) => (
+                          <div key={i} className="flex items-center gap-2 text-xs text-text-secondary">
+                            <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
+                            <span>{highlight}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Project Info - Always on Right */}
+                <div>
                   <div className="space-y-6">
                     {/* Header */}
                     <div>
@@ -155,43 +190,6 @@ const ProjectsSection = () => {
                       <button className="px-6 py-2 border border-text-muted text-text-muted rounded-lg font-medium hover:border-foreground hover:text-foreground transition-all duration-300">
                         Engineering
                       </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Project Visual */}
-                <div className={index % 2 === 1 ? 'lg:col-start-1' : ''}>
-                  <div className="relative group">
-                    {/* Glowing Background */}
-                    <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-xl rounded-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
-                    
-                    {/* Main Card */}
-                    <div className="relative glass rounded-2xl p-8 hover-lift">
-                      <div className="aspect-video bg-gradient-surface rounded-lg flex items-center justify-center relative overflow-hidden">
-                        {/* Project Preview */}
-                        <div className="text-center">
-                          <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
-                            {project.title.charAt(0)}
-                          </div>
-                          <h4 className="text-xl font-bold text-foreground mb-2">{project.title}</h4>
-                          <p className="text-text-muted text-sm">{project.subtitle}</p>
-                        </div>
-
-                        {/* Floating Elements */}
-                        <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
-                        <div className="absolute bottom-4 left-4 w-2 h-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                      </div>
-
-                      {/* Technical Highlights */}
-                      <div className="mt-6 space-y-2">
-                        <h5 className="text-sm font-semibold text-foreground mb-2">Technical Highlights:</h5>
-                        {project.highlights.slice(0, 2).map((highlight, i) => (
-                          <div key={i} className="flex items-center gap-2 text-xs text-text-secondary">
-                            <span className="w-1.5 h-1.5 bg-accent rounded-full"></span>
-                            <span>{highlight}</span>
-                          </div>
-                        ))}
-                      </div>
                     </div>
                   </div>
                 </div>

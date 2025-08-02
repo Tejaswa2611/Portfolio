@@ -4,15 +4,22 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState('about');
 
   const navItems = [
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
+    { id: 'about', label: 'Introduction' },
+    { id: 'experience', label: 'Work Experience' },
     { id: 'projects', label: 'Projects' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'leadership', label: 'Leadership' },
+    { id: 'skills', label: 'Technical Skills' },
     { id: 'contact', label: 'Contact' }
   ];
 
   useEffect(() => {
+    const navItems = [
+      { id: 'about', label: 'Introduction' },
+      { id: 'experience', label: 'Work Experience' },
+      { id: 'projects', label: 'Projects' },
+      { id: 'skills', label: 'Technical Skills' },
+      { id: 'contact', label: 'Contact' }
+    ];
+
     const handleScroll = () => {
       const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 200;
@@ -38,23 +45,32 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed top-8 left-1/2 transform -translate-x-1/2 z-50 glass rounded-full px-6 py-3">
-      <ul className="flex items-center space-x-6">
+    <nav className="fixed left-12 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+      <div className="space-y-8">
         {navItems.map((item) => (
-          <li key={item.id}>
+          <div key={item.id} className="relative flex items-center group">
+            {/* Dash indicator */}
+            <div className={`w-8 h-px mr-6 transition-all duration-300 ${
+              activeSection === item.id 
+                ? 'bg-white' 
+                : 'bg-gray-600 group-hover:bg-gray-400'
+            }`}></div>
+            
+            {/* Navigation text */}
             <button
               onClick={() => scrollToSection(item.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+              className={`text-left font-bold text-base tracking-wide transition-all duration-300 whitespace-nowrap ${
                 activeSection === item.id
-                  ? 'bg-gradient-primary text-primary-foreground shadow-glow'
-                  : 'text-text-secondary hover:text-foreground hover:bg-hover'
+                  ? 'text-white'
+                  : 'text-gray-400 hover:text-gray-200'
               }`}
+              style={{ fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif" }}
             >
               {item.label}
             </button>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
     </nav>
   );
 };
