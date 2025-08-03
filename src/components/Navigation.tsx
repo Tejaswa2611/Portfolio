@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('about');
+  const [isScrolling, setIsScrolling] = useState(false);
 
   const navItems = [
     { id: 'about', label: 'Introduction' },
@@ -22,7 +23,18 @@ const Navigation = () => {
       { id: 'contact', label: 'Contact' }
     ];
 
+    let scrollTimer: NodeJS.Timeout;
+
     const handleScroll = () => {
+      // Show navigation while scrolling
+      setIsScrolling(true);
+      
+      // Hide navigation after scrolling stops
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        setIsScrolling(false);
+      }, 1500);
+
       const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 200;
 
@@ -36,7 +48,10 @@ const Navigation = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimer);
+    };
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -47,33 +62,43 @@ const Navigation = () => {
   };
 
   return (
-    <nav className="fixed left-12 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
-      <div className="space-y-8">
-        {navItems.map((item) => (
-          <div key={item.id} className="relative flex items-center group">
-            {/* Dash indicator */}
-            <div className={`w-8 h-px mr-6 transition-all duration-300 ${
-              activeSection === item.id 
-                ? 'bg-white' 
-                : 'bg-gray-600 group-hover:bg-gray-400'
-            }`}></div>
-            
-            {/* Navigation text */}
-            <button
-              onClick={() => scrollToSection(item.id)}
-              className={`text-left font-bold text-base tracking-wide transition-all duration-300 whitespace-nowrap ${
-                activeSection === item.id
-                  ? 'text-white'
-                  : 'text-gray-400 hover:text-gray-200'
-              }`}
-              style={{ fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif" }}
-            >
-              {item.label}
-            </button>
-          </div>
-        ))}
-      </div>
-    </nav>
+    <div className="fixed left-0 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block group">
+      {/* Hover trigger area */}
+      <div className="w-16 h-96 absolute left-0 top-1/2 transform -translate-y-1/2"></div>
+      
+      {/* Navigation content */}
+      <nav className={`ml-4 transition-all duration-300 transform translate-x-0 ${
+        isScrolling 
+          ? 'opacity-100 translate-x-8' 
+          : 'opacity-0 group-hover:opacity-100 group-hover:translate-x-8'
+      }`}>
+        <div className="space-y-8">
+          {navItems.map((item) => (
+            <div key={item.id} className="relative flex items-center group/item">
+              {/* Dash indicator */}
+              <div className={`w-8 h-px mr-6 transition-all duration-300 ${
+                activeSection === item.id 
+                  ? 'bg-white' 
+                  : 'bg-gray-600 group-hover/item:bg-gray-400'
+              }`}></div>
+              
+              {/* Navigation text */}
+              <button
+                onClick={() => scrollToSection(item.id)}
+                className={`text-left font-bold text-base tracking-wide transition-all duration-300 whitespace-nowrap ${
+                  activeSection === item.id
+                    ? 'text-white'
+                    : 'text-gray-400 hover:text-gray-200'
+                }`}
+                style={{ fontFamily: "'Inter', 'Helvetica Neue', Arial, sans-serif" }}
+              >
+                {item.label}
+              </button>
+            </div>
+          ))}
+        </div>
+      </nav>
+    </div>
   );
 };
 

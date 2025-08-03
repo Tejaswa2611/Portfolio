@@ -60,31 +60,31 @@ const ExperienceSection = () => {
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full"></div>
           </div>
 
-          {/* Timeline */}
+          {/* Enhanced Timeline */}
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <div 
                 key={index} 
-                className="relative fade-in-up" 
+                className="relative fade-in-up card-hover" 
                 style={{ animationDelay: `${index * 0.2}s` }}
               >
-                {/* Timeline Line */}
-                <div className="absolute left-8 top-8 bottom-0 w-px bg-gradient-primary opacity-30"></div>
+                {/* Enhanced Timeline Line */}
+                <div className="absolute left-8 top-8 bottom-0 w-px bg-gradient-primary opacity-30 glow-pulse"></div>
                 
-                {/* Timeline Dot */}
-                <div className="absolute left-6 top-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-glow"></div>
+                {/* Enhanced Timeline Dot */}
+                <div className="absolute left-6 top-8 w-4 h-4 bg-primary rounded-full border-4 border-background shadow-glow glow-pulse hover:scale-125 transition-transform duration-300"></div>
 
-                {/* Content Card */}
-                <div className="ml-20 glass rounded-xl p-8 hover-lift">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6">
+                {/* Enhanced Content Card */}
+                <div className="ml-20 glass rounded-xl p-8 hover-lift hover:shadow-2xl transition-all duration-500 group">
+                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between mb-6 stagger-children">
                     <div className="flex items-start gap-4">
-                      {/* Company Logo */}
+                      {/* Enhanced Company Logo */}
                       <div className="flex items-center gap-2 flex-shrink-0">
-                        <div className="w-12 h-12 flex items-center justify-center">
+                        <div className="w-12 h-12 flex items-center justify-center hover:scale-110 transition-transform duration-300 magnetic-btn">
                           <img 
                             src={exp.logo} 
                             alt={`${exp.company} logo`}
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-contain group-hover:drop-shadow-xl transition-all duration-300"
                             onError={(e) => {
                               const target = e.target as HTMLImageElement;
                               target.style.display = 'none';

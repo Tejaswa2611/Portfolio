@@ -1,6 +1,18 @@
 import TechIcon from '../TechIcon';
+// import { useStaggeredScrollAnimation } from '../../hooks/useScrollAnimation';
 
 const SkillsSection = () => {
+  // Temporarily comment out scroll animations to fix the app
+  // const { elementRef: headerRef, isInView: headerInView } = useStaggeredScrollAnimation({
+  //   threshold: 0.3,
+  //   rootMargin: '0px 0px -100px 0px'
+  // });
+
+  // const { elementRef: gridRef, animateChildren } = useStaggeredScrollAnimation({
+  //   threshold: 0.2,
+  //   rootMargin: '0px 0px -50px 0px'
+  // });
+
   const technologies = [
     // Core Programming & Most In-Demand
     "JavaScript", "TypeScript", "Python", "React.js", "Next.js", "Node.js",
@@ -26,42 +38,41 @@ const SkillsSection = () => {
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full"></div>
           </div>
 
-          {/* Technology Icons Grid */}
+          {/* Enhanced Technology Icons Grid */}
           <div className="fade-in-up">
             <div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-1 justify-items-center">
               {technologies.map((tech, index) => (
                 <div 
                   key={index}
-                  className="relative"
-                  style={{ animationDelay: `${index * 0.05}s` }}
+                  className="relative group"
+                  style={{ 
+                    animationDelay: `${index * 0.08}s`,
+                    animation: 'slideInUp 0.6s ease-out forwards'
+                  }}
                 >
-                  {/* Icon container - just for positioning */}
+                  {/* Clean Icon container with smooth animations */}
                   <div className="relative w-32 h-32 flex items-center justify-center">
                     
-                    {/* Hoverable icon with tooltip */}
-                    <div className="group relative hover-lift">
-                      {/* Glowing background */}
-                      <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 blur-xl rounded-full transition-opacity duration-500"></div>
-                      
-                      <TechIcon 
-                        name={tech} 
-                        className="w-18 h-18 group-hover:scale-110 transition-transform duration-300" 
-                      />
-                      
-                      {/* Cool Tooltip */}
-                      <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1 pointer-events-none z-10">
-                        <div className="relative">
-                          {/* Tooltip background with gradient */}
-                          <div className="bg-gradient-to-r from-primary/90 to-accent/90 backdrop-blur-sm text-white text-xs font-semibold px-3 py-2 rounded-lg shadow-lg border border-white/20">
-                            <span className="whitespace-nowrap">{tech}</span>
-                            {/* Tooltip arrow */}
-                            <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-primary/90"></div>
-                          </div>
-                          
-                          {/* Shimmer effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 group-hover:animate-pulse rounded-lg"></div>
-                        </div>
-                      </div>
+                    <TechIcon 
+                      name={tech} 
+                      className="w-20 h-20 hover:scale-110 transition-all duration-300 relative z-10 drop-shadow-lg hover:drop-shadow-xl opacity-80 hover:opacity-100" 
+                    />
+                    
+                    {/* Clean Tooltip */}
+                    <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 px-3 py-2 bg-black text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-50 shadow-lg group-hover:-translate-y-1">
+                      {tech}
+                      {/* Tooltip arrow */}
+                      <div className="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-black"></div>
+                    </div>
+
+                    {/* Subtle hover background */}
+                    <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 rounded-full transition-all duration-300 scale-95 group-hover:scale-100"></div>
+                    
+                    {/* Enhanced subtle sparkle effects */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute top-3 right-3 w-1 h-1 bg-primary rounded-full animate-ping" style={{ animationDelay: '0.2s' }}></div>
+                      <div className="absolute bottom-3 left-3 w-0.5 h-0.5 bg-accent rounded-full animate-ping" style={{ animationDelay: '0.4s' }}></div>
+                      <div className="absolute top-1/2 left-2 w-0.5 h-0.5 bg-secondary rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
                     </div>
                   </div>
                 </div>

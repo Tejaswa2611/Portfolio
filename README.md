@@ -1,73 +1,88 @@
-# Welcome to your Lovable project
+# Tejaswa Mathur - Portfolio
 
-## Project info
+A modern, responsive portfolio website showcasing my projects, skills, and experience as a Software Engineer and Full-Stack Developer.
 
-**URL**: https://lovable.dev/projects/a02da340-81fd-4b35-8c3f-b25fc7965513
+## ✨ Features
 
-## How can I edit this code?
+- **Modern Design**: Clean, professional interface with smooth animations
+- **Responsive**: Optimized for all devices and screen sizes
+- **Interactive**: Scroll-triggered animations and hover effects
+- **Performance**: Built with Vite for fast loading and optimal performance
+- **Accessibility**: Following best practices for web accessibility
 
-There are several ways of editing your application.
+## 🛠️ Built With
 
-**Use Lovable**
+- **Frontend**: React 18, TypeScript
+- **Styling**: Tailwind CSS, Custom CSS animations
+- **UI Components**: Radix UI components with shadcn/ui
+- **Build Tool**: Vite
+- **Package Manager**: Bun
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/a02da340-81fd-4b35-8c3f-b25fc7965513) and start prompting.
+## 🚀 Quick Start
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
+- Node.js (v18 or higher)
+- Bun package manager
 
-**Use your preferred IDE**
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/Tejaswa2611/Portfolio.git
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+# Navigate to project directory
+cd Portfolio
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# Install dependencies
+bun install
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+# Start development server
+bun run dev
 ```
 
-**Edit a file directly in GitHub**
+The site will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Build for Production
+```bash
+# Create production build
+bun run build
 
-**Use GitHub Codespaces**
+# Preview production build
+bun run preview
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## 📁 Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # Reusable UI components
+│   ├── sections/       # Page sections (Hero, About, Projects, etc.)
+│   └── ui/            # shadcn/ui components
+├── hooks/             # Custom React hooks
+├── lib/               # Utility functions
+└── pages/             # Page components
+```
 
-This project is built with:
+## 🎯 Sections
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Hero**: Introduction with animated elements
+- **About**: Personal background and expertise
+- **Skills**: Technical skills with interactive icons
+- **Experience**: Professional experience timeline
+- **Projects**: Featured projects with live demos
+- **Leadership**: Leadership experience and achievements
+- **Contact**: Contact information and social links
 
-## How can I deploy this project?
+## 🚀 Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/a02da340-81fd-4b35-8c3f-b25fc7965513) and click on Share -> Publish.
+This project can be deployed to various platforms:
 
-## Can I connect a custom domain to my Lovable project?
+- **Vercel**: Connect your GitHub repository for automatic deployments
+- **Netlify**: Deploy from Git with continuous deployment
+- **GitHub Pages**: Host directly from your repository
+- **AWS Amplify**: Deploy with AWS hosting services
 
-Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+---
+
+Made with ❤️ by Tejaswa Mathur

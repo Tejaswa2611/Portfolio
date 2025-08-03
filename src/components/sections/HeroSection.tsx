@@ -52,37 +52,42 @@ const HeroSection = () => {
 
   return (
     <section id="about" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24">
-      {/* Animated Background Elements */}
+      {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-secondary/10 rounded-full blur-2xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float glow-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float glow-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-secondary/10 rounded-full blur-2xl animate-float glow-pulse" style={{ animationDelay: '2s' }}></div>
+        
+        {/* Additional Floating Particles */}
+        <div className="absolute top-16 left-16 w-4 h-4 bg-primary/30 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
+        <div className="absolute bottom-20 right-20 w-3 h-3 bg-accent/40 rounded-full animate-ping" style={{ animationDelay: '1.2s' }}></div>
+        <div className="absolute top-40 right-40 w-2 h-2 bg-secondary/50 rounded-full animate-ping" style={{ animationDelay: '2.1s' }}></div>
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-32 items-start">
             
-            {/* Left Side - Profile Image */}
-            <div className="flex justify-center lg:justify-end order-2 lg:order-1 lg:pt-16">
+            {/* Left Side - Enhanced Profile Image */}
+            <div className="flex justify-center lg:justify-end order-2 lg:order-1 lg:pt-16 fade-in-left">
               <div className="relative">
-                {/* Glowing Ring */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary rounded-full opacity-30 blur-xl animate-pulse"></div>
+                {/* Enhanced Glowing Ring */}
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary rounded-full opacity-30 blur-xl animate-pulse glow-pulse"></div>
                 
                 {/* Profile Container */}
-                <div className="relative w-64 h-64 md:w-80 md:h-80">
+                <div className="relative w-52 h-52 md:w-64 md:h-64 card-hover">
                   {/* Floating Animation Container */}
                   <div className="w-full h-full animate-float">
                     <div className="relative w-full h-full">
-                      {/* Border Ring */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary rounded-full p-1">
-                        <div className="w-full h-full bg-background rounded-full p-4">
+                      {/* Enhanced Border Ring */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary rounded-full p-1 glow-pulse">
+                        <div className="w-full h-full bg-background rounded-full p-1">
                           {/* Profile Image */}
                           <div className="w-full h-full rounded-full overflow-hidden shadow-2xl">
                             <img 
-                              src="/assets/profilepic.jpeg" 
+                              src="/assets/pp.png" 
                               alt="Tejaswa Mathur"
-                              className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                              className="w-full h-full object-cover object-top hover:scale-110 transition-transform duration-700 parallax"
                               onError={(e) => {
                                 const target = e.target as HTMLImageElement;
                                 target.style.display = 'none';
@@ -97,24 +102,25 @@ const HeroSection = () => {
                         </div>
                       </div>
                       
-                      {/* Floating Particles */}
-                      <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary/20 rounded-full animate-bounce" style={{ animationDelay: '0.5s' }}></div>
-                      <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-accent/20 rounded-full animate-bounce" style={{ animationDelay: '1s' }}></div>
-                      <div className="absolute top-1/4 -left-6 w-4 h-4 bg-secondary/20 rounded-full animate-bounce" style={{ animationDelay: '1.5s' }}></div>
+                      {/* Enhanced Floating Particles */}
+                      <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary/20 rounded-full animate-bounce glow-pulse" style={{ animationDelay: '0.5s' }}></div>
+                      <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-accent/20 rounded-full animate-bounce glow-pulse" style={{ animationDelay: '1s' }}></div>
+                      <div className="absolute top-1/4 -left-6 w-4 h-4 bg-secondary/20 rounded-full animate-bounce glow-pulse" style={{ animationDelay: '1.5s' }}></div>
+                      <div className="absolute bottom-1/4 -right-6 w-3 h-3 bg-primary/30 rounded-full animate-ping" style={{ animationDelay: '2s' }}></div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Side - Content */}
-            <div className="text-center lg:text-left order-1 lg:order-2 space-y-8">
+            {/* Right Side - Enhanced Content */}
+            <div className="text-center lg:text-left order-1 lg:order-2 space-y-8 fade-in-right">
               
-              {/* Main Heading */}
-              <div className="space-y-4">
+              {/* Main Heading with Stagger Animation */}
+              <div className="space-y-4 stagger-children">
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
-                  <span className="block text-foreground">Tejaswa</span>
-                  <span className="block text-gradient">Mathur</span>
+                  <span className="block text-foreground hover:text-gradient transition-all duration-500 cursor-default">Tejaswa</span>
+                  <span className="block text-gradient hover:scale-105 transition-transform duration-300 cursor-default">Mathur</span>
                 </h1>
 
                 {/* Animated Subtitle with Typewriter Effect */}

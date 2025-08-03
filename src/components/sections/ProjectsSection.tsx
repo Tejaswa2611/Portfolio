@@ -1,12 +1,34 @@
 import TechIcon from '../TechIcon';
+import { useScrollAnimation, useStaggeredScrollAnimation } from '../../hooks/useScrollAnimation';
+// import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+
+// Project type definition
+interface Project {
+  title: string;
+  subtitle: string;
+  status: string;
+  technologies: string[];
+  description: string;
+  features: string[];
+  highlights: string[];
+}
 
 const ProjectsSection = () => {
+  // Scroll animation hooks
+  const headerRef = useScrollAnimation({ threshold: 0.1 });
+  const projectsContainerRef = useStaggeredScrollAnimation({ threshold: 0.1 });
+  // Temporarily comment out scroll animation to fix the app
+  // const { elementRef: headerRef, isInView: headerInView } = useScrollAnimation({
+  //   threshold: 0.3,
+  //   rootMargin: '0px 0px -100px 0px'
+  // });
+
   // Project image mapping
   const projectImages: { [key: string]: string } = {
     "Permitly": "/assets/Projects/Permitly.png",
     "CodeTrail": "/assets/Projects/CodeTrail.png", 
     "FeedForward": "/assets/Projects/FeedForward.png",
-    "Alumni Hunt": "/assets/institutions/IITk logo.png"
+    "Alumni Hunt": "/assets/institutions/iitk-logo white.png"
   };
 
   const projects = [
@@ -93,73 +115,66 @@ const ProjectsSection = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16 fade-in-up">
+          <div 
+            ref={headerRef.elementRef as React.RefObject<HTMLDivElement>}
+            className={`text-center mb-16 scroll-fade-in-up ${headerRef.isInView ? 'animate' : ''}`}
+          >
             <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-6">
               Featured Projects
             </h2>
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full"></div>
           </div>
 
-          {/* Projects Grid */}
-          <div className="space-y-16">
+          {/* Projects Grid with Alternating Layout */}
+          <div 
+            ref={projectsContainerRef.elementRef as React.RefObject<HTMLDivElement>}
+            className="space-y-32"
+          >
             {projects.map((project, index) => (
-              <div 
-                key={index}
-                className="grid lg:grid-cols-2 gap-12 items-center fade-in-up"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                {/* Project Visual - Always on Left */}
-                <div>
-                  <div className="relative group">
-                    {/* Glowing Background */}
-                    <div className="absolute inset-0 bg-gradient-primary opacity-20 blur-xl rounded-2xl group-hover:opacity-30 transition-opacity duration-500"></div>
+              <div key={index} className={`grid lg:grid-cols-2 gap-16 items-center ${
+                index % 2 === 0 ? 'scroll-slide-in-from-left' : 'scroll-slide-in-from-right'
+              } ${projectsContainerRef.animateChildren ? 'animate' : ''}`} style={{ animationDelay: `${index * 0.15}s` }}>
+                {/* Project Visual */}
+                <div className={`${index % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}`}>
+                  <div className="relative group card-hover">
+                    {/* Clean Border Effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                     
-                    {/* Main Card */}
-                    <div className="relative glass rounded-2xl p-8 hover-lift">
-                      <div className="aspect-video bg-gradient-surface rounded-lg flex items-center justify-center relative overflow-hidden">
-                        {/* Project Image or Fallback */}
+                    <div className="relative glass rounded-xl p-6 overflow-hidden">
+                      {/* Project Image or Fallback */}
+                      <div className="aspect-video rounded-lg overflow-hidden bg-background/50 mb-4 parallax">
                         {projectImages[project.title] ? (
                           <img 
-                            src={projectImages[project.title]}
-                            alt={`${project.title} preview`}
-                            className={`w-full h-full rounded-lg ${project.title === 'Alumni Hunt' ? 'object-contain p-4 bg-white' : 'object-cover'}`}
-                            onError={(e) => {
-                              const target = e.target as HTMLImageElement;
-                              target.style.display = 'none';
-                              const parent = target.parentElement;
-                              if (parent) {
-                                parent.innerHTML = `
-                                  <div class="text-center p-8">
-                                    <div class="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
-                                      ${project.title.charAt(0)}
-                                    </div>
-                                    <h4 class="text-xl font-bold text-foreground mb-2">${project.title}</h4>
-                                    <p class="text-text-muted text-sm">${project.subtitle}</p>
-                                  </div>
-                                `;
-                              }
-                            }}
+                            src={projectImages[project.title]} 
+                            alt={project.title}
+                            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                              project.title === "Alumni Hunt" 
+                                ? "object-contain p-4" 
+                                : "object-cover"
+                            }`}
                           />
                         ) : (
-                          <div className="text-center p-8">
-                            <div className="w-16 h-16 bg-gradient-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mb-4 mx-auto">
-                              {project.title.charAt(0)}
+                          <div className="w-full h-full flex items-center justify-center text-text-secondary">
+                            <div className="text-center slide-in-content" style={{ animationDelay: '0.3s' }}>
+                              <div className="w-16 h-16 mx-auto mb-3 rounded-lg bg-gradient-primary/20 flex items-center justify-center animate-float">
+                                <span className="text-2xl font-bold text-primary">{project.title.charAt(0)}</span>
+                              </div>
+                              <p className="text-sm opacity-70">Project Preview</p>
                             </div>
-                            <h4 className="text-xl font-bold text-foreground mb-2">{project.title}</h4>
-                            <p className="text-text-muted text-sm">{project.subtitle}</p>
                           </div>
                         )}
 
-                        {/* Floating Elements */}
-                        <div className="absolute top-4 right-4 w-3 h-3 bg-primary rounded-full animate-pulse"></div>
-                        <div className="absolute bottom-4 left-4 w-2 h-2 bg-accent rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                        {/* Clean Floating Elements */}
+                        <div className="absolute top-4 right-4 w-3 h-3 bg-primary/60 rounded-full animate-pulse"></div>
+                        <div className="absolute bottom-4 left-4 w-2 h-2 bg-accent/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                        <div className="absolute top-1/2 left-8 w-1.5 h-1.5 bg-primary/40 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
                       </div>
 
-                      {/* Tech Stack Icons */}
-                      <div className="mt-6 flex justify-center gap-4">
-                        {project.technologies.map((tech, i) => (
-                          <div key={i} className="w-8 h-8 flex items-center justify-center">
-                            <TechIcon name={tech} className="w-full h-full opacity-70 hover:opacity-100 transition-opacity" />
+                      {/* Tech Stack Icons with Stagger Animation */}
+                      <div className="mt-6 flex justify-center gap-4 stagger-fast">
+                        {project.technologies.map((tech: string, i: number) => (
+                          <div key={i} className="w-8 h-8 flex items-center justify-center tech-icon-hover">
+                            <TechIcon name={tech} className="w-full h-full opacity-70 hover:opacity-100 transition-all duration-300" />
                           </div>
                         ))}
                       </div>
@@ -167,14 +182,14 @@ const ProjectsSection = () => {
                   </div>
                 </div>
 
-                {/* Project Info - Always on Right */}
-                <div>
-                  <div className="space-y-6">
+                {/* Project Info */}
+                <div className={`${index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
+                  <div className="space-y-6 slide-in-content" style={{ animationDelay: `${index * 0.15 + 0.2}s` }}>
                     {/* Header */}
                     <div>
                       <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-3xl font-bold text-foreground">{project.title}</h3>
-                        <span className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full">
+                        <h3 className="text-3xl font-bold text-foreground hover:text-gradient transition-all duration-300 cursor-default">{project.title}</h3>
+                        <span className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full scale-in" style={{ animationDelay: `${index * 0.15 + 0.4}s` }}>
                           {project.status}
                         </span>
                       </div>
@@ -189,25 +204,25 @@ const ProjectsSection = () => {
                     {/* Key Features */}
                     <div>
                       <h4 className="text-lg font-semibold text-foreground mb-3">Key Features:</h4>
-                      <ul className="space-y-2">
-                        {project.features.slice(0, 2).map((feature, i) => (
-                          <li key={i} className="flex items-start gap-3 text-text-secondary">
-                            <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></span>
-                            <span className="text-sm">{feature}</span>
+                      <ul className="space-y-2 stagger-fast">
+                        {project.features.slice(0, 2).map((feature: string, i: number) => (
+                          <li key={i} className="flex items-start gap-3 text-text-secondary group">
+                            <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></span>
+                            <span className="text-sm group-hover:text-foreground transition-colors duration-300">{feature}</span>
                           </li>
                         ))}
                       </ul>
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-4 pt-4">
+                    <div className="flex flex-wrap gap-4 pt-4 stagger-fast">
                       {/* View Live / Download Button */}
                       {project.title === "CodeTrail" && (
                         <a
                           href="https://main.d2jc37kgdt0gqz.amplifyapp.com/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300"
+                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300 magnetic-btn"
                         >
                           View Live
                         </a>
@@ -217,7 +232,7 @@ const ProjectsSection = () => {
                           href="https://main.d2hkbxalmybjjw.amplifyapp.com/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300"
+                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300 magnetic-btn"
                         >
                           View Live
                         </a>
@@ -243,7 +258,7 @@ const ProjectsSection = () => {
                           }
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-2 border border-accent text-accent rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-300"
+                          className="px-6 py-2 border border-accent text-accent rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-300 magnetic-btn"
                         >
                           View on GitHub
                         </a>
@@ -255,16 +270,16 @@ const ProjectsSection = () => {
                           href="/assets/Projects/Report.pdf"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-all duration-300 flex items-center gap-2"
+                          className="px-6 py-2 bg-red-600 text-white rounded-lg font-medium hover:bg-red-700 transition-all duration-300 flex items-center gap-2 magnetic-btn hover-lift"
                         >
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                          <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-12" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clipRule="evenodd" />
                           </svg>
                           PDF Report
                         </a>
                       )}
                       
-                      {/* Engineering Button */}
+                      {/* Enhanced Engineering Button */}
                       {(project.title === "CodeTrail" || project.title === "FeedForward") && (
                         <a
                           href={
@@ -276,11 +291,10 @@ const ProjectsSection = () => {
                           className="relative px-6 py-2.5 rounded-lg font-semibold transition-all duration-300 overflow-hidden group transform hover:scale-105 hover:-translate-y-1"
                           style={{
                             background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-                            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.4), 0 0 20px rgba(118, 75, 162, 0.3)',
-                            animation: 'rainbow-glow 2s ease-in-out infinite alternate'
+                            boxShadow: '0 4px 15px rgba(102, 126, 234, 0.3)'
                           }}
                         >
-                          {/* Animated rainbow background */}
+                          {/* Clean animated background */}
                           <div 
                             className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                             style={{
@@ -290,24 +304,24 @@ const ProjectsSection = () => {
                             }}
                           ></div>
                           
-                          {/* Sparkle overlay */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="absolute top-1 left-2 w-1 h-1 bg-white rounded-full animate-ping"></div>
-                            <div className="absolute top-3 right-3 w-1.5 h-1.5 bg-yellow-300 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
-                            <div className="absolute bottom-2 left-4 w-1 h-1 bg-cyan-300 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
-                            <div className="absolute bottom-3 right-2 w-1 h-1 bg-pink-300 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+                          {/* Subtle sparkle overlay */}
+                          <div className="absolute inset-0 opacity-0 group-hover:opacity-60 transition-opacity duration-300">
+                            <div className="absolute top-1 left-2 w-1 h-1 bg-white/60 rounded-full animate-ping"></div>
+                            <div className="absolute top-3 right-3 w-1.5 h-1.5 bg-yellow-300/60 rounded-full animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                            <div className="absolute bottom-2 left-4 w-1 h-1 bg-cyan-300/60 rounded-full animate-ping" style={{ animationDelay: '1s' }}></div>
+                            <div className="absolute bottom-3 right-2 w-1 h-1 bg-pink-300/60 rounded-full animate-pulse" style={{ animationDelay: '1.5s' }}></div>
                           </div>
                           
                           {/* Sliding shine effect */}
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                           
                           {/* Button text */}
                           <span className="relative z-10 text-white font-bold tracking-wide text-shadow">
                             Engineering
                           </span>
                           
-                          {/* Pulsing border */}
-                          <div className="absolute inset-0 rounded-lg border-2 border-white/20 group-hover:border-white/40 transition-all duration-300"></div>
+                          {/* Clean border */}
+                          <div className="absolute inset-0 rounded-lg border-2 border-white/10 group-hover:border-white/30 transition-all duration-300"></div>
                         </a>
                       )}
                     </div>
