@@ -56,18 +56,18 @@ const ProjectsSection = () => {
       subtitle: "Enterprise Visitor Management System",
       status: "Soon Releasing on Google Play Store",
       technologies: ["Kotlin", "Node.js", "Jetpack Compose", "AWS", "Android", "Redis", "Prisma", "Firebase"],
-      description: "Enterprise-grade visitor management platform with biometric integration and compliance automation, currently in beta testing for Google Play Store release.",
+      description: "Digitized manual visitor check-in/check-out process by eliminating paper-based logs through QR authentication system, enabling instant secured facility access and digital visitor records.",
       features: [
-        "Offline-first architecture with intelligent sync and conflict resolution",
-        "Role-based approval workflows with Active Directory integration", 
-        "Advanced security framework including facial recognition and end-to-end encryption",
-        "Real-time analytics dashboard with sub-2-second API response times"
+        "Built full-stack architecture with Node.js REST API backend and Kotlin/Jetpack Compose native Android frontend",
+        "Implemented MVVM architecture pattern with Room database for offline-first data persistence and conflict resolution", 
+        "Integrated Firebase Cloud Messaging for real-time push notifications and Firebase Authentication for secure user management",
+        "Developed QR code generation/scanning system with automated email notifications using AWS SES and Redis caching layer"
       ],
       highlights: [
-        "Built with Kotlin/Jetpack Compose for native Android performance",
-        "Node.js backend with automated compliance reporting",
-        "GDPR-compliant data handling with automatic PII anonymization",
-        "Cloudinary integration for secure photo processing"
+        "Native Android development using Kotlin with Jetpack Compose UI toolkit for modern declarative interfaces",
+        "RESTful API backend built with Node.js, Express.js, and Prisma ORM for type-safe database operations",
+        "AWS cloud infrastructure with S3 storage, Lambda functions, and RDS PostgreSQL database deployment",
+        "Advanced caching strategy using Redis for session management and performance optimization achieving sub-2s response times"
       ]
     },
     {
