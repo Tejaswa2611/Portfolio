@@ -51,12 +51,12 @@ const HeroSection = () => {
   };
 
   return (
-    <section id="about" className="min-h-screen flex items-center justify-center relative overflow-hidden py-24">
+    <section id="about" className="min-h-screen flex items-center justify-center relative overflow-hidden py-8 px-4 sm:py-16 lg:py-24">
       {/* Enhanced Animated Background Elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl animate-float glow-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl animate-float glow-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-secondary/10 rounded-full blur-2xl animate-float glow-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 sm:w-64 sm:h-64 bg-primary/10 rounded-full blur-3xl animate-float glow-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 sm:w-96 sm:h-96 bg-accent/10 rounded-full blur-3xl animate-float glow-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 w-16 h-16 sm:w-32 sm:h-32 bg-secondary/10 rounded-full blur-2xl animate-float glow-pulse" style={{ animationDelay: '2s' }}></div>
         
         {/* Additional Floating Particles */}
         <div className="absolute top-16 left-16 w-4 h-4 bg-primary/30 rounded-full animate-ping" style={{ animationDelay: '0.5s' }}></div>
@@ -64,18 +64,18 @@ const HeroSection = () => {
         <div className="absolute top-40 right-40 w-2 h-2 bg-secondary/50 rounded-full animate-ping" style={{ animationDelay: '2.1s' }}></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-32 items-start">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-12 lg:gap-16 items-start">
             
-            {/* Left Side - Enhanced Profile Image */}
-            <div className="flex justify-center lg:justify-end order-2 lg:order-1 lg:pt-16 fade-in-left">
+            {/* Profile Image - Shows FIRST on mobile, LEFT side on desktop */}
+            <div className="flex justify-center lg:justify-end order-1 lg:pt-8 fade-in-left">
               <div className="relative">
                 {/* Enhanced Glowing Ring */}
                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-secondary rounded-full opacity-30 blur-xl animate-pulse glow-pulse"></div>
                 
                 {/* Profile Container */}
-                <div className="relative w-52 h-52 md:w-64 md:h-64 card-hover">
+                <div className="relative w-32 h-32 sm:w-48 sm:h-48 md:w-56 md:h-56 lg:w-64 lg:h-64 card-hover">
                   {/* Floating Animation Container */}
                   <div className="w-full h-full animate-float">
                     <div className="relative w-full h-full">
@@ -113,18 +113,18 @@ const HeroSection = () => {
               </div>
             </div>
 
-            {/* Right Side - Enhanced Content */}
-            <div className="text-center lg:text-left order-1 lg:order-2 space-y-8 fade-in-right">
+            {/* Content - Shows SECOND on mobile, RIGHT side on desktop */}
+            <div className="text-center lg:text-left order-2 space-y-6 sm:space-y-8 fade-in-right">
               
               {/* Main Heading with Stagger Animation */}
-              <div className="space-y-4 stagger-children">
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight">
+              <div className="space-y-2 sm:space-y-4 stagger-children">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-bold leading-tight">
                   <span className="block text-foreground hover:text-gradient transition-all duration-500 cursor-default">Tejaswa</span>
                   <span className="block text-gradient hover:scale-105 transition-transform duration-300 cursor-default">Mathur</span>
                 </h1>
 
                 {/* Animated Subtitle with Typewriter Effect */}
-                <div className="text-xl md:text-2xl lg:text-3xl text-text-secondary font-medium">
+                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-text-secondary font-medium">
                   <span className="inline-block min-h-[1.5em]">
                     {displayText}
                     {isTyping && <span className="animate-pulse text-primary">|</span>}
@@ -133,7 +133,7 @@ const HeroSection = () => {
               </div>
 
               {/* Quick Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start max-w-md sm:max-w-none mx-auto lg:mx-0">
                 {quickActions.map((action, index) => (
                   <button
                     key={index}

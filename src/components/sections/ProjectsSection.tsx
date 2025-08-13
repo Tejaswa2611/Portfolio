@@ -147,9 +147,9 @@ const ProjectsSection = () => {
                           <img 
                             src={projectImages[project.title]} 
                             alt={project.title}
-                            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
+                            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
                               project.title === "Alumni Hunt" 
-                                ? "object-contain p-4" 
+                                ? "object-contain p-6 bg-white/10" 
                                 : "object-cover"
                             }`}
                           />

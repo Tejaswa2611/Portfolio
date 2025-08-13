@@ -20,7 +20,7 @@ const SpotlightCursor = () => {
       };
 
       // Adjust this value for speed: lower = slower/more lag, higher = faster
-      const lerpFactor = 0.08;
+      const lerpFactor = 0.15;
 
       currentPos.current.x = lerp(currentPos.current.x, targetPos.current.x, lerpFactor);
       currentPos.current.y = lerp(currentPos.current.y, targetPos.current.y, lerpFactor);

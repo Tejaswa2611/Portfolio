@@ -14,7 +14,7 @@ const Index = () => {
       <SpotlightCursor />
       <Navigation />
       
-      <main>
+      <main className="pt-16 lg:pt-0">
         <HeroSection />
         <ExperienceSection />
         <ProjectsSection />
