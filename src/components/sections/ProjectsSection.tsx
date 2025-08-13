@@ -111,27 +111,27 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section id="projects" className="py-24">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-12 sm:py-16 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-7xl mx-auto">
           {/* Section Header */}
           <div 
             ref={headerRef.elementRef as React.RefObject<HTMLDivElement>}
-            className={`text-center mb-16 scroll-fade-in-up ${headerRef.isInView ? 'animate' : ''}`}
+            className={`text-center mb-12 sm:mb-16 scroll-fade-in-up ${headerRef.isInView ? 'animate' : ''}`}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-gradient mb-6">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gradient mb-4 sm:mb-6">
               Featured Projects
             </h2>
-            <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full"></div>
+            <div className="w-16 sm:w-24 h-1 bg-gradient-primary mx-auto rounded-full"></div>
           </div>
 
           {/* Projects Grid with Alternating Layout */}
           <div 
             ref={projectsContainerRef.elementRef as React.RefObject<HTMLDivElement>}
-            className="space-y-32"
+            className="space-y-16 sm:space-y-24 lg:space-y-32"
           >
             {projects.map((project, index) => (
-              <div key={index} className={`grid lg:grid-cols-2 gap-16 items-center ${
+              <div key={index} className={`grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center ${
                 index % 2 === 0 ? 'scroll-slide-in-from-left' : 'scroll-slide-in-from-right'
               } ${projectsContainerRef.animateChildren ? 'animate' : ''}`} style={{ animationDelay: `${index * 0.15}s` }}>
                 {/* Project Visual */}
@@ -140,14 +140,14 @@ const ProjectsSection = () => {
                     {/* Clean Border Effect */}
                     <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-accent/20 rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-500"></div>
                     
-                    <div className="relative glass rounded-xl p-6 overflow-hidden">
+                    <div className="relative glass rounded-xl p-4 sm:p-6 overflow-hidden">
                       {/* Project Image or Fallback */}
-                      <div className="aspect-video rounded-lg overflow-hidden bg-background/50 mb-4 parallax">
+                      <div className="aspect-video rounded-lg overflow-hidden bg-background/50 mb-3 sm:mb-4 parallax">
                         {projectImages[project.title] ? (
                           <img 
                             src={projectImages[project.title]} 
                             alt={project.title}
-                            className={`w-full h-full transition-transform duration-500 group-hover:scale-105 ${
+                            className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 ${
                               project.title === "Alumni Hunt" 
                                 ? "object-contain p-4" 
                                 : "object-cover"
@@ -171,9 +171,9 @@ const ProjectsSection = () => {
                       </div>
 
                       {/* Tech Stack Icons with Stagger Animation */}
-                      <div className="mt-6 flex justify-center gap-4 stagger-fast">
+                      <div className="mt-4 sm:mt-6 flex justify-center gap-2 sm:gap-4 stagger-fast">
                         {project.technologies.map((tech: string, i: number) => (
-                          <div key={i} className="w-8 h-8 flex items-center justify-center tech-icon-hover">
+                          <div key={i} className="w-6 h-6 sm:w-8 sm:h-8 flex items-center justify-center tech-icon-hover">
                             <TechIcon name={tech} className="w-full h-full opacity-70 hover:opacity-100 transition-all duration-300" />
                           </div>
                         ))}
@@ -184,30 +184,30 @@ const ProjectsSection = () => {
 
                 {/* Project Info */}
                 <div className={`${index % 2 === 1 ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <div className="space-y-6 slide-in-content" style={{ animationDelay: `${index * 0.15 + 0.2}s` }}>
+                  <div className="space-y-4 sm:space-y-6 slide-in-content" style={{ animationDelay: `${index * 0.15 + 0.2}s` }}>
                     {/* Header */}
                     <div>
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-3xl font-bold text-foreground hover:text-gradient transition-all duration-300 cursor-default">{project.title}</h3>
-                        <span className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full scale-in" style={{ animationDelay: `${index * 0.15 + 0.4}s` }}>
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-2">
+                        <h3 className="text-2xl sm:text-3xl font-bold text-foreground hover:text-gradient transition-all duration-300 cursor-default">{project.title}</h3>
+                        <span className="px-3 py-1 bg-primary/20 text-primary text-sm rounded-full scale-in self-start sm:self-auto" style={{ animationDelay: `${index * 0.15 + 0.4}s` }}>
                           {project.status}
                         </span>
                       </div>
-                      <p className="text-xl text-text-secondary font-medium">{project.subtitle}</p>
+                      <p className="text-lg sm:text-xl text-text-secondary font-medium">{project.subtitle}</p>
                     </div>
 
                     {/* Description */}
-                    <p className="text-text-secondary leading-relaxed">
+                    <p className="text-sm sm:text-base text-text-secondary leading-relaxed">
                       {project.description}
                     </p>
 
                     {/* Key Features */}
                     <div>
-                      <h4 className="text-lg font-semibold text-foreground mb-3">Key Features:</h4>
+                      <h4 className="text-base sm:text-lg font-semibold text-foreground mb-2 sm:mb-3">Key Features:</h4>
                       <ul className="space-y-2 stagger-fast">
                         {project.features.slice(0, 2).map((feature: string, i: number) => (
-                          <li key={i} className="flex items-start gap-3 text-text-secondary group">
-                            <span className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></span>
+                          <li key={i} className="flex items-start gap-2 sm:gap-3 text-text-secondary group">
+                            <span className="w-2 h-2 bg-primary rounded-full mt-1.5 sm:mt-2 flex-shrink-0 group-hover:scale-150 transition-transform duration-300"></span>
                             <span className="text-sm group-hover:text-foreground transition-colors duration-300">{feature}</span>
                           </li>
                         ))}
@@ -215,14 +215,14 @@ const ProjectsSection = () => {
                     </div>
 
                     {/* Action Buttons */}
-                    <div className="flex flex-wrap gap-4 pt-4 stagger-fast">
+                    <div className="flex flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4 stagger-fast">
                       {/* View Live / Download Button */}
                       {project.title === "CodeTrail" && (
                         <a
                           href="https://main.d2jc37kgdt0gqz.amplifyapp.com/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300 magnetic-btn"
+                          className="px-4 sm:px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300 magnetic-btn text-sm sm:text-base"
                         >
                           View Live
                         </a>
@@ -232,20 +232,20 @@ const ProjectsSection = () => {
                           href="https://main.d2hkbxalmybjjw.amplifyapp.com/"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300 magnetic-btn"
+                          className="px-4 sm:px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium hover-lift transition-all duration-300 magnetic-btn text-sm sm:text-base"
                         >
                           View Live
                         </a>
                       )}
                       {project.title === "Permitly" && (
-                        <button className="px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium opacity-75 cursor-not-allowed transition-all duration-300">
+                        <button className="px-4 sm:px-6 py-2 bg-gradient-primary text-primary-foreground rounded-lg font-medium opacity-75 cursor-not-allowed transition-all duration-300 text-sm sm:text-base">
                           Download Now
                         </button>
                       )}
                       
                       {/* GitHub Button */}
                       {project.title === "Permitly" ? (
-                        <button className="px-6 py-2 border border-accent text-accent rounded-lg font-medium opacity-75 cursor-not-allowed transition-all duration-300">
+                        <button className="px-4 sm:px-6 py-2 border border-accent text-accent rounded-lg font-medium opacity-75 cursor-not-allowed transition-all duration-300 text-sm sm:text-base">
                           View on GitHub
                         </button>
                       ) : (
