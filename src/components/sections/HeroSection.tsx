@@ -132,19 +132,46 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              {/* Quick Action Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start max-w-md sm:max-w-none mx-auto lg:mx-0">
+              {/* Quick Action Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-4xl mx-auto lg:mx-0 mt-8">
                 {quickActions.map((action, index) => (
                   <button
                     key={index}
                     onClick={() => scrollToSection(action.target)}
-                    className={`group relative px-6 py-4 bg-gradient-to-r ${action.gradient} text-white rounded-xl font-semibold text-sm uppercase tracking-wide transition-all duration-300 hover-lift hover:scale-105 overflow-hidden transform hover:shadow-2xl`}
+                    className="group relative p-5 bg-card/60 backdrop-blur-xl border border-border/50 rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:bg-card/80 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/20 transform hover:-translate-y-1"
                     style={{ animationDelay: `${(index + 1) * 0.2}s` }}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-r ${action.hoverGradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                    <div className="relative flex items-center justify-center gap-2">
-                      <action.icon size={18} />
-                      <span>{action.label}</span>
+                    {/* Background Glow */}
+                    <div className={`absolute inset-0 bg-gradient-to-br ${action.gradient} opacity-0 group-hover:opacity-10 transition-all duration-500 rounded-3xl blur-xl`}></div>
+                    
+                    {/* Card Content */}
+                    <div className="relative flex flex-col items-center text-center space-y-3">
+                      {/* Icon Container with better visibility */}
+                      <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${action.gradient} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-xl border-2 border-white/20`}>
+                        <action.icon size={20} className="text-white font-bold stroke-2" strokeWidth={2.5} />
+                      </div>
+                      
+                      {/* Label */}
+                      <div className="space-y-0.5">
+                        <h3 className="font-bold text-base text-foreground group-hover:text-primary transition-colors duration-300">
+                          {action.label}
+                        </h3>
+                        <p className="text-xs text-muted-foreground group-hover:text-foreground/80 transition-colors duration-300">
+                          {action.label === "Contact Me" && "Get in touch"}
+                          {action.label === "Projects" && "View my work"}
+                          {action.label === "Experience" && "See my journey"}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Animated Border */}
+                    <div className={`absolute inset-0 bg-gradient-to-r ${action.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`}
+                         style={{ 
+                           background: `linear-gradient(45deg, transparent, var(--primary), transparent)`,
+                           mask: 'linear-gradient(black, black) content-box, linear-gradient(black, black)',
+                           maskComposite: 'exclude',
+                           padding: '1px'
+                         }}>
                     </div>
                   </button>
                 ))}

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 const Navigation = () => {
   const [activeSection, setActiveSection] = useState('about');
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isInHeroSection, setIsInHeroSection] = useState(true);
 
   const navItems = [
     { id: 'about', label: 'Introduction' },
@@ -34,6 +35,14 @@ const Navigation = () => {
       scrollTimer = setTimeout(() => {
         setIsScrolling(false);
       }, 1500);
+
+      // Check if user is in hero section
+      const heroSection = document.getElementById('about');
+      if (heroSection) {
+        const rect = heroSection.getBoundingClientRect();
+        const isHeroVisible = rect.bottom > window.innerHeight * 0.2;
+        setIsInHeroSection(isHeroVisible);
+      }
 
       const sections = navItems.map(item => document.getElementById(item.id));
       const scrollPosition = window.scrollY + 200;
@@ -68,9 +77,11 @@ const Navigation = () => {
       
       {/* Navigation content */}
       <nav className={`ml-4 transition-all duration-300 transform translate-x-0 ${
-        isScrolling 
-          ? 'opacity-100 translate-x-8' 
-          : 'opacity-0 group-hover:opacity-100 group-hover:translate-x-8'
+        isInHeroSection
+          ? 'opacity-100 translate-x-8' // Always visible in hero section
+          : isScrolling 
+            ? 'opacity-100 translate-x-8' // Show while scrolling in other sections
+            : 'opacity-0 group-hover:opacity-100 group-hover:translate-x-8' // Hide/show on hover in other sections
       }`}>
         <div className="space-y-8">
           {navItems.map((item) => (
